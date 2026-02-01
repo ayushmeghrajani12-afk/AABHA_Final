@@ -817,15 +817,52 @@ h3 {
   backface-visibility: hidden;
 }
 
+/* Logo Fallback Background (shown if video fails) */
+.hero-bg-fallback {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  background-image: url('assets/aabha-logo-transparent.png');
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  max-width: 600px;
+  margin: 0 auto;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0.15;
+  filter: brightness(1.2) drop-shadow(0 0 40px rgba(212, 175, 55, 0.3));
+  animation: logoBackgroundGlow 4s ease-in-out infinite;
+}
+
+@keyframes logoBackgroundGlow {
+
+  0%,
+  100% {
+    opacity: 0.15;
+    filter: brightness(1.2) drop-shadow(0 0 40px rgba(212, 175, 55, 0.3));
+  }
+
+  50% {
+    opacity: 0.25;
+    filter: brightness(1.3) drop-shadow(0 0 60px rgba(212, 175, 55, 0.4));
+  }
+}
+
 /* Fallback: Use static image on low-power devices */
 @media (prefers-reduced-motion: reduce) {
   .back-video {
     display: none;
   }
 
-  .hero-bg {
-    background-image: url('path-to-fallback-image.jpg');
-    filter: brightness(0.4) contrast(1.2);
+  .hero-bg-fallback {
+    display: block;
+    animation: none;
+    opacity: 0.2;
   }
 }
 

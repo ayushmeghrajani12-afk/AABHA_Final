@@ -58,12 +58,13 @@
         </div>
       </nav>
 
-      <!-- ENHANCED VIDEO WITH MULTIPLE FORMATS AND FALLBACK -->
-      <video id="hero-video" class="back-video" autoplay muted loop playsinline webkit-playsinline
-        x-webkit-airplay="allow" preload="auto" defaultMuted disablePictureInPicture>
+      <!-- VIDEO WITH LOGO FALLBACK -->
+      <video id="hero-video" class="back-video" autoplay muted loop playsinline webkit-playsinline preload="auto">
         <source src="Free_Waterfall_4k_Videoclip_Nature_Videos_Youstock_1440P.mp4" type="video/mp4">
-        Your browser does not support the video tag.
       </video>
+
+      <!-- FALLBACK: Logo background (hidden by default, shown if video fails) -->
+      <div class="hero-bg-fallback"></div>
 
       <div class="hero-bg"></div>
       <div class="hero-year"></div>
@@ -186,117 +187,61 @@
     </footer>
   </div>
 
-  <!-- MAXIMUM iOS Video Compatibility Script -->
+  <!-- Smart Video with Logo Fallback -->
   <script>
     (function () {
-      'use strict';
+      const video = document.getElementById('hero-video');
+      const fallback = document.querySelector('.hero-bg-fallback');
 
-      // Wait for DOM to be ready
-      if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', initVideo);
-      } else {
-        initVideo();
+      if (!video) return;
+
+      // Force muted and inline for iOS
+      video.muted = true;
+      video.playsInline = true;
+      video.volume = 0;
+
+      // Try to play video
+      const playPromise = video.play();
+
+      if (playPromise !== undefined) {
+        playPromise
+          .then(() => {
+            // Video playing successfully
+            console.log('✓ Video playing');
+          })
+          .catch(error => {
+            // Video failed - show logo fallback
+            console.log('✗ Video blocked, showing logo fallback');
+            video.style.display = 'none';
+            fallback.style.display = 'block';
+
+            // Try playing on user interaction
+            const tryPlay = () => {
+              video.play().then(() => {
+                video.style.display = 'block';
+                fallback.style.display = 'none';
+                console.log('✓ Video playing after interaction');
+              }).catch(() => {
+                // Keep logo fallback
+              });
+              document.removeEventListener('touchstart', tryPlay);
+              document.removeEventListener('click', tryPlay);
+            };
+
+            document.addEventListener('touchstart', tryPlay, { once: true });
+            document.addEventListener('click', tryPlay, { once: true });
+          });
       }
 
-      function initVideo() {
-        const video = document.getElementById('hero-video');
-        if (!video) return;
-
-        // Detect iOS
-        const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
-
-        // Force critical properties
-        video.muted = true;
-        video.defaultMuted = true;
-        video.playsInline = true;
-        video.autoplay = true;
-
-        // Set volume to 0 (extra insurance)
-        video.volume = 0;
-
-        // iOS-specific attributes
-        if (isIOS) {
-          video.setAttribute('playsinline', '');
-          video.setAttribute('webkit-playsinline', '');
-          video.setAttribute('x-webkit-airplay', 'allow');
+      // Check if video actually loaded and is playing after 2 seconds
+      setTimeout(() => {
+        if (video.paused || video.readyState < 2) {
+          video.style.display = 'none';
+          fallback.style.display = 'block';
+          console.log('⚠ Video not ready, using logo fallback');
         }
+      }, 2000);
 
-        // Attempt 1: Direct play
-        const playPromise = video.play();
-
-        if (playPromise !== undefined) {
-          playPromise
-            .then(() => {
-              console.log('✓ Video autoplay successful');
-            })
-            .catch(error => {
-              console.warn('⚠ Autoplay blocked:', error.message);
-
-              // Attempt 2: Play on user interaction
-              const playOnInteraction = function (e) {
-                video.play()
-                  .then(() => {
-                    console.log('✓ Video playing after user interaction');
-                    // Remove listeners after successful play
-                    removeListeners();
-                  })
-                  .catch(err => console.error('✗ Play failed:', err));
-              };
-
-              const removeListeners = function () {
-                document.removeEventListener('touchstart', playOnInteraction);
-                document.removeEventListener('touchend', playOnInteraction);
-                document.removeEventListener('click', playOnInteraction);
-                document.removeEventListener('scroll', playOnInteraction);
-              };
-
-              // Listen for ANY user interaction
-              document.addEventListener('touchstart', playOnInteraction, { passive: true });
-              document.addEventListener('touchend', playOnInteraction, { passive: true });
-              document.addEventListener('click', playOnInteraction);
-              document.addEventListener('scroll', playOnInteraction, { passive: true, once: true });
-            });
-        }
-
-        // Attempt 3: Play when video becomes visible
-        if ('IntersectionObserver' in window) {
-          const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-              if (entry.isIntersecting && video.paused) {
-                video.play().catch(e => console.log('IO play failed:', e));
-              }
-            });
-          }, { threshold: 0.1 });
-
-          observer.observe(video);
-        }
-
-        // Attempt 4: Play on page visibility change
-        document.addEventListener('visibilitychange', function () {
-          if (!document.hidden && video.paused) {
-            video.play().catch(e => console.log('Visibility play failed:', e));
-          }
-        });
-
-        // Attempt 5: Play after a short delay (helps on some iOS versions)
-        setTimeout(() => {
-          if (video.paused) {
-            video.play().catch(e => console.log('Delayed play failed:', e));
-          }
-        }, 500);
-
-        // Monitor video state
-        video.addEventListener('playing', () => console.log('✓ Video is playing'));
-        video.addEventListener('pause', () => console.log('⚠ Video paused'));
-        video.addEventListener('error', (e) => console.error('✗ Video error:', e));
-
-        // Keep video playing (restart if paused unexpectedly)
-        setInterval(() => {
-          if (video.paused && !document.hidden) {
-            video.play().catch(() => { });
-          }
-        }, 3000);
-      }
     })();
   </script>
 
