@@ -3,8 +3,12 @@
 
 <head>
   <meta charset="UTF-8" />
-  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- iOS Video Meta Tags -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
   <title>Aabha - Inspired by Nature</title>
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -16,9 +20,12 @@
 
   <div class="main_div">
     <!-- Preloader -->
-    <!-- Preloader -->
     <div class="preloader">
       <div class="preloader-content">
+        <!-- LOGO -->
+        <div class="preloader-logo">
+          <img src="assets/Aabha logo transparent.png" alt="Aabha Logo" class="logo-image">
+        </div>
         <div class="preloader-text">Aabha<span class="welcome-text">welcomes you</span></div>
         <div class="loading-track">
           <div class="loading-fill"></div>
@@ -38,13 +45,9 @@
     <div class="cursor-dot"></div>
     <div class="cursor-outline"></div>
 
-    <!-- Navigation -->
-
-
     <!-- Hero Section -->
     <header class="hero">
       <nav class="main-nav fade-in-section">
-
         <div class="nav-links">
           <a href="#about">
             <span class="navtext">Why Aabha?</span>
@@ -54,9 +57,14 @@
           </a>
         </div>
       </nav>
-      <video class="back-video" autoplay muted loop playsinline preload="auto">
+
+      <!-- ENHANCED VIDEO WITH MULTIPLE FORMATS AND FALLBACK -->
+      <video id="hero-video" class="back-video" autoplay muted loop playsinline webkit-playsinline
+        x-webkit-airplay="allow" preload="auto" defaultMuted disablePictureInPicture>
         <source src="Free_Waterfall_4k_Videoclip_Nature_Videos_Youstock_1440P.mp4" type="video/mp4">
+        Your browser does not support the video tag.
       </video>
+
       <div class="hero-bg"></div>
       <div class="hero-year"></div>
       <div class="hero-content">
@@ -71,7 +79,7 @@
       </div>
     </header>
 
-    <!-- Brand Introduction (Asymmetrical Editorial) -->
+    <!-- Brand Introduction -->
     <section id="about" class="section about-section">
       <div class="container about-layout">
         <div class="about-title-wrapper">
@@ -90,7 +98,7 @@
       </div>
     </section>
 
-    <!-- Infinite Marquee -->
+    <!-- Marquee -->
     <div class="marquee-container">
       <div class="marquee-content">
         <span>Organic &nbsp;•&nbsp; Purity &nbsp;•&nbsp; Radiance &nbsp;•&nbsp; Nature &nbsp;•&nbsp; Glow &nbsp;•&nbsp;
@@ -100,7 +108,7 @@
       </div>
     </div>
 
-    <!-- Products Section (Showcase) -->
+    <!-- Products Section -->
     <section id="products" class="section products-section">
       <div class="product-grid">
         <!-- Product 1 -->
@@ -167,7 +175,6 @@
             <a href="https://wa.me/+919974358866">Contact</a>
           </div>
           <div class="footer-social">
-            <!-- Social placeholders -->
             <span>Instagram</span>
             <span>Facebook</span>
           </div>
@@ -178,6 +185,120 @@
       </div>
     </footer>
   </div>
+
+  <!-- MAXIMUM iOS Video Compatibility Script -->
+  <script>
+    (function () {
+      'use strict';
+
+      // Wait for DOM to be ready
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initVideo);
+      } else {
+        initVideo();
+      }
+
+      function initVideo() {
+        const video = document.getElementById('hero-video');
+        if (!video) return;
+
+        // Detect iOS
+        const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+
+        // Force critical properties
+        video.muted = true;
+        video.defaultMuted = true;
+        video.playsInline = true;
+        video.autoplay = true;
+
+        // Set volume to 0 (extra insurance)
+        video.volume = 0;
+
+        // iOS-specific attributes
+        if (isIOS) {
+          video.setAttribute('playsinline', '');
+          video.setAttribute('webkit-playsinline', '');
+          video.setAttribute('x-webkit-airplay', 'allow');
+        }
+
+        // Attempt 1: Direct play
+        const playPromise = video.play();
+
+        if (playPromise !== undefined) {
+          playPromise
+            .then(() => {
+              console.log('✓ Video autoplay successful');
+            })
+            .catch(error => {
+              console.warn('⚠ Autoplay blocked:', error.message);
+
+              // Attempt 2: Play on user interaction
+              const playOnInteraction = function (e) {
+                video.play()
+                  .then(() => {
+                    console.log('✓ Video playing after user interaction');
+                    // Remove listeners after successful play
+                    removeListeners();
+                  })
+                  .catch(err => console.error('✗ Play failed:', err));
+              };
+
+              const removeListeners = function () {
+                document.removeEventListener('touchstart', playOnInteraction);
+                document.removeEventListener('touchend', playOnInteraction);
+                document.removeEventListener('click', playOnInteraction);
+                document.removeEventListener('scroll', playOnInteraction);
+              };
+
+              // Listen for ANY user interaction
+              document.addEventListener('touchstart', playOnInteraction, { passive: true });
+              document.addEventListener('touchend', playOnInteraction, { passive: true });
+              document.addEventListener('click', playOnInteraction);
+              document.addEventListener('scroll', playOnInteraction, { passive: true, once: true });
+            });
+        }
+
+        // Attempt 3: Play when video becomes visible
+        if ('IntersectionObserver' in window) {
+          const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+              if (entry.isIntersecting && video.paused) {
+                video.play().catch(e => console.log('IO play failed:', e));
+              }
+            });
+          }, { threshold: 0.1 });
+
+          observer.observe(video);
+        }
+
+        // Attempt 4: Play on page visibility change
+        document.addEventListener('visibilitychange', function () {
+          if (!document.hidden && video.paused) {
+            video.play().catch(e => console.log('Visibility play failed:', e));
+          }
+        });
+
+        // Attempt 5: Play after a short delay (helps on some iOS versions)
+        setTimeout(() => {
+          if (video.paused) {
+            video.play().catch(e => console.log('Delayed play failed:', e));
+          }
+        }, 500);
+
+        // Monitor video state
+        video.addEventListener('playing', () => console.log('✓ Video is playing'));
+        video.addEventListener('pause', () => console.log('⚠ Video paused'));
+        video.addEventListener('error', (e) => console.error('✗ Video error:', e));
+
+        // Keep video playing (restart if paused unexpectedly)
+        setInterval(() => {
+          if (video.paused && !document.hidden) {
+            video.play().catch(() => { });
+          }
+        }, 3000);
+      }
+    })();
+  </script>
 
   <script type="module" src="main.js"></script>
 </body>
