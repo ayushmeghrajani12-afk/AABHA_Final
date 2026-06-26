@@ -186,7 +186,7 @@ h3 {
   text-transform: uppercase;
   letter-spacing: 2px;
   font-weight: 900;
-  color: white;
+  color: #111111;
   transition: color 0.4s ease;
   cursor: pointer;
 }
@@ -195,9 +195,9 @@ h3 {
   color: var(--color-primary);
 }
 
-/* When video is playing, switch nav text to black */
+/* When video is playing (dark background), switch nav text to white */
 .nav-on-video .nav-links span {
-  color: #000000;
+  color: #ffffff;
 }
 
 .nav-on-video .nav-links a:hover span {
@@ -825,7 +825,7 @@ h3 {
   backface-visibility: hidden;
 }
 
-/* Logo Fallback Background (shown if video fails) */
+/* Brand Image Fallback Background (shown if video fails) */
 .hero-bg-fallback {
   display: none;
   position: absolute;
@@ -835,16 +835,12 @@ h3 {
   height: 100%;
   z-index: -1;
 
-  /* Beautiful modern fluid gradient background with logo */
-  background:
-    url('../assets/aabha-logo-transparent.png') no-repeat center 30%,
-    radial-gradient(circle at 85% 15%, rgba(212, 175, 55, 0.15) 0%, transparent 60%),
-    radial-gradient(circle at 15% 85%, rgba(45, 82, 68, 0.4) 0%, transparent 60%),
-    radial-gradient(circle at 50% 50%, rgba(26, 52, 38, 0.7) 0%, #030a06 100%);
-  background-size: min(450px, 70vw) auto, cover, cover, cover;
+  /* Use the brand image as full background */
+  background: url('../assets/aabha image.png') no-repeat center center;
+  background-size: cover;
 
   opacity: 1;
-  filter: brightness(0.9) contrast(1.05);
+  filter: brightness(1) contrast(1);
 }
 
 /* Animated glow effect */
