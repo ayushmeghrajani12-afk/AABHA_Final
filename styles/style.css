@@ -895,9 +895,13 @@ h3 {
   opacity: 1;
 }
 
-.hero.fallback-active .hero-content,
-.hero.fallback-active .main-nav {
+.hero.fallback-active .hero-content {
   position: relative;
+  z-index: 2;
+}
+
+.hero.fallback-active .main-nav {
+  position: absolute;
   z-index: 2;
 }
 
