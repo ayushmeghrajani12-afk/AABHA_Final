@@ -827,30 +827,16 @@ h3 {
   height: 100%;
   z-index: -1;
 
-  /* Beautiful gradient background (always works even if logo doesn't load) */
+  /* Beautiful modern fluid gradient background with logo */
   background:
-    url('../assets/aabha-logo-transparent.png'),
-    url('assets/aabha-logo-transparent.png'),
-    url('./assets/aabha-logo-transparent.png'),
-    url('/assets/aabha-logo-transparent.png'),
-    linear-gradient(135deg,
-      #1a2e22 0%,
-      #2F4F38 30%,
-      #3a5f48 50%,
-      #2F4F38 70%,
-      #1a2e22 100%);
-
-  background-position: center center;
-  background-repeat: no-repeat, no-repeat, no-repeat, no-repeat, initial;
-  background-size:
-    min(500px, 70vw) auto,
-    min(500px, 70vw) auto,
-    min(500px, 70vw) auto,
-    min(500px, 70vw) auto,
-    cover;
+    url('../assets/aabha-logo-transparent.png') no-repeat center center,
+    radial-gradient(circle at 85% 15%, rgba(212, 175, 55, 0.15) 0%, transparent 60%),
+    radial-gradient(circle at 15% 85%, rgba(45, 82, 68, 0.4) 0%, transparent 60%),
+    radial-gradient(circle at 50% 50%, rgba(26, 52, 38, 0.7) 0%, #030a06 100%);
+  background-size: min(450px, 70vw) auto, cover, cover, cover;
 
   opacity: 1;
-  filter: brightness(0.85) contrast(1.1);
+  filter: brightness(0.9) contrast(1.05);
 }
 
 /* Animated glow effect */
@@ -863,10 +849,10 @@ h3 {
   width: min(700px, 85vw);
   height: min(700px, 85vw);
   background: radial-gradient(circle,
-      rgba(212, 175, 55, 0.2) 0%,
-      rgba(212, 175, 55, 0.1) 40%,
+      rgba(212, 175, 55, 0.15) 0%,
+      rgba(212, 175, 55, 0.05) 40%,
       transparent 70%);
-  animation: fallbackGlow 5s ease-in-out infinite;
+  animation: fallbackGlow 8s ease-in-out infinite;
   pointer-events: none;
 }
 
@@ -917,23 +903,13 @@ h3 {
 /* Fallback responsive adjustments */
 @media (max-width: 768px) {
   .hero-bg-fallback {
-    background-size:
-      min(400px, 80vw) auto,
-      min(400px, 80vw) auto,
-      min(400px, 80vw) auto,
-      min(400px, 80vw) auto,
-      cover;
+    background-size: min(350px, 80vw) auto, cover, cover, cover;
   }
 }
 
 @media (max-width: 480px) {
   .hero-bg-fallback {
-    background-size:
-      min(280px, 85vw) auto,
-      min(280px, 85vw) auto,
-      min(280px, 85vw) auto,
-      min(280px, 85vw) auto,
-      cover;
+    background-size: min(250px, 85vw) auto, cover, cover, cover;
     filter: brightness(0.8) contrast(1.15);
   }
 
