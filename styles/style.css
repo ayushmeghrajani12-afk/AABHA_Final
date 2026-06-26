@@ -195,18 +195,18 @@ h3 {
   color: var(--color-primary);
 }
 
-/* When video is playing (dark background), switch nav text to white */
+/* Keep the navigation legible over the waterfall video. */
 .nav-on-video .nav-links span {
-  color: #ffffff;
+  color: #111111;
 }
 
 .nav-on-video .nav-links a:hover span {
   color: var(--color-primary);
 }
 
-/* When video fails (light fallback image), keep nav text black */
+/* The darker image fallback needs high-contrast navigation. */
 .nav-on-fallback .nav-links span {
-  color: #000000;
+  color: #ffffff;
 }
 
 .nav-on-fallback .nav-links a:hover span {
@@ -1247,7 +1247,7 @@ a:focus {
   }
 
   .main-nav {
-    left: 32%;
+    left: 50%;
     padding: 1rem;
   }
 
@@ -1326,7 +1326,7 @@ a:focus {
 /* Small mobile (480px) */
 @media (max-width: 480px) {
   .main-nav {
-    left: 30%;
+    left: 50%;
     flex-direction: column;
     gap: 0.75rem;
     padding: 0.75rem 0.5rem;
@@ -1428,7 +1428,7 @@ a:focus {
 /* Extra small screens (360px and below) */
 @media (max-width: 360px) {
   .main-nav {
-    left: 25%;
+    left: 50%;
     padding: 0.5rem;
   }
 
