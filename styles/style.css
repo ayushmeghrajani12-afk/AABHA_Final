@@ -852,7 +852,7 @@ h3 {
   height: 100%;
   z-index: 0;
 
-  background: url('../assets/hero-fallback-bg.png') no-repeat center center;
+  background: url('../assets/hero-video-fallback.png') no-repeat center center;
   background-size: cover;
 
   opacity: 1;
