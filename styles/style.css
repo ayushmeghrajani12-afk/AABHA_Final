@@ -187,11 +187,20 @@ h3 {
   letter-spacing: 2px;
   font-weight: 900;
   color: white;
-  transition: color 0.3s;
+  transition: color 0.4s ease;
   cursor: pointer;
 }
 
 .nav-links a:hover span {
+  color: var(--color-primary);
+}
+
+/* When video is playing, switch nav text to black */
+.nav-on-video .nav-links span {
+  color: #000000;
+}
+
+.nav-on-video .nav-links a:hover span {
   color: var(--color-primary);
 }
 

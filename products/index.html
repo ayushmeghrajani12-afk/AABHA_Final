@@ -48,7 +48,7 @@
 
         .products-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr));
             gap: 40px;
             margin-top: 50px;
         }
@@ -191,28 +191,138 @@
 
         @media (max-width: 768px) {
             h1 {
-                font-size: 2.5rem;
+                font-size: 2rem;
+            }
+
+            .subtitle {
+                font-size: 1rem;
+            }
+
+            header {
+                margin-bottom: 30px;
             }
 
             .products-grid {
                 grid-template-columns: 1fr;
-                gap: 30px;
+                gap: 24px;
+                margin-top: 30px;
             }
 
             .product-footer {
                 flex-direction: column;
-                gap: 15px;
+                gap: 12px;
                 align-items: stretch;
             }
 
             .shop-now-btn {
                 width: 100%;
                 justify-content: center;
+                padding: 12px 20px;
             }
 
             .price {
                 text-align: center;
                 min-width: auto;
+            }
+
+            .product-image {
+                height: 260px;
+            }
+
+            .product-info {
+                padding: 20px;
+            }
+
+            .product-name {
+                font-size: 1.4rem;
+            }
+
+            .category-title {
+                font-size: 1.6rem;
+            }
+
+            .category-section {
+                margin-bottom: 50px;
+                scroll-margin-top: 65px;
+            }
+
+            .categories-nav {
+                padding: 10px 8px;
+                gap: 6px;
+                margin: 0 -20px 30px -20px;
+            }
+
+            .categories-nav a {
+                font-size: 0.75rem;
+                padding: 6px 10px;
+                letter-spacing: 0.5px;
+            }
+
+            .coming-soon-card {
+                min-height: 300px;
+                padding: 30px 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 20px 12px;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+                letter-spacing: 2px;
+            }
+
+            .subtitle {
+                font-size: 0.9rem;
+            }
+
+            .products-grid {
+                gap: 18px;
+            }
+
+            .product-image {
+                height: 220px;
+            }
+
+            .product-info {
+                padding: 16px;
+                gap: 6px;
+            }
+
+            .product-name {
+                font-size: 1.25rem;
+            }
+
+            .product-tagline {
+                font-size: 0.88rem;
+            }
+
+            .product-description {
+                font-size: 0.82rem;
+            }
+
+            .categories-nav {
+                padding: 8px 6px;
+                margin: 0 -12px 24px -12px;
+            }
+
+            .categories-nav a {
+                font-size: 0.7rem;
+                padding: 5px 8px;
+            }
+
+            .badge {
+                top: 10px;
+                right: 10px;
+                padding: 5px 10px;
+                font-size: 0.75rem;
+            }
+
+            .category-title {
+                font-size: 1.4rem;
+                letter-spacing: 1px;
             }
         }
 
@@ -240,8 +350,8 @@
             margin: 0 -20px 50px -20px;
             border-bottom: 1px solid rgba(212, 175, 55, 0.2);
             display: flex;
-            justify-content: center;
-            gap: 15px;
+            justify-content: flex-start;
+            gap: 6px;
             overflow-x: auto;
             scrollbar-width: none;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
@@ -327,16 +437,48 @@
             0%, 100% { transform: scale(1); opacity: 0.7; }
             50% { transform: scale(1.1); opacity: 1; }
         }
+
+        .top-nav {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 24px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .top-nav a {
+            color: #d4af37;
+            text-decoration: none;
+            font-size: 1rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: color 0.3s;
+        }
+
+        .top-nav a:hover {
+            color: #ffffff;
+        }
+
+        @media (max-width: 480px) {
+            .top-nav {
+                gap: 16px;
+            }
+            .top-nav a {
+                font-size: 0.82rem;
+                letter-spacing: 1.5px;
+            }
+        }
     </style>
 </head>
 
 <body>
     <div class="container">
         <header>
-            <nav style="display: flex; justify-content: center; gap: 30px; margin-bottom: 20px;">
-                <a href="../index.html" style="color: #d4af37; text-decoration: none; font-size: 1rem; letter-spacing: 2px; text-transform: uppercase;">Home</a>
-                <a href="../about/index.html" style="color: #d4af37; text-decoration: none; font-size: 1rem; letter-spacing: 2px; text-transform: uppercase;">About</a>
-                <a href="../contact/index.html" style="color: #d4af37; text-decoration: none; font-size: 1rem; letter-spacing: 2px; text-transform: uppercase;">Contact</a>
+            <nav class="top-nav">
+                <a href="../index.html">Home</a>
+                <a href="../about/index.html">About</a>
+                <a href="../contact/index.html">Contact</a>
             </nav>
             <h1>Aabha</h1>
             <p class="subtitle">Nature's Luxury for Your Skin</p>

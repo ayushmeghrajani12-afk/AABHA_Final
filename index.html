@@ -198,6 +198,7 @@
     (function () {
       const video = document.getElementById('hero-video');
       const fallback = document.querySelector('.hero-bg-fallback');
+      const nav = document.querySelector('.main-nav');
 
       if (!video || !fallback) return;
 
@@ -208,6 +209,7 @@
         if (!videoPlaying) {
           video.style.display = 'none';
           fallback.style.display = 'block';
+          if (nav) nav.classList.remove('nav-on-video');
           console.log('→ Showing logo fallback');
         }
       }
@@ -217,6 +219,7 @@
         videoPlaying = true;
         video.style.display = 'block';
         fallback.style.display = 'none';
+        if (nav) nav.classList.add('nav-on-video');
         console.log('✓ Showing video');
       }
 
