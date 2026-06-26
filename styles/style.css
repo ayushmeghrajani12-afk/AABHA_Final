@@ -204,6 +204,15 @@ h3 {
   color: var(--color-primary);
 }
 
+/* When video fails (light fallback image), keep nav text black */
+.nav-on-fallback .nav-links span {
+  color: #000000;
+}
+
+.nav-on-fallback .nav-links a:hover span {
+  color: var(--color-primary);
+}
+
 /* --- Utility Classes --- */
 .section {
   padding: var(--spacing-xl) var(--spacing-md);
@@ -835,8 +844,7 @@ h3 {
   height: 100%;
   z-index: -1;
 
-  /* Use the brand image as full background */
-  background: url('../assets/aabha image.png') no-repeat center center;
+  background: url('../assets/hero-fallback-bg.png') no-repeat center center;
   background-size: cover;
 
   opacity: 1;
@@ -898,6 +906,11 @@ h3 {
     animation: none;
   }
 
+  .main-nav .nav-links span,
+  .main-nav.nav-on-video .nav-links span {
+    color: #000000;
+  }
+
   .hero-bg-fallback::before {
     animation: none;
     opacity: 0.5;
@@ -907,14 +920,15 @@ h3 {
 /* Fallback responsive adjustments */
 @media (max-width: 768px) {
   .hero-bg-fallback {
-    background-size: min(350px, 80vw) auto, cover, cover, cover;
+    background-size: cover;
+    background-position: center top;
   }
 }
 
 @media (max-width: 480px) {
   .hero-bg-fallback {
-    background-size: min(250px, 85vw) auto, cover, cover, cover;
-    filter: brightness(0.8) contrast(1.15);
+    background-size: cover;
+    background-position: center top;
   }
 
   .hero-bg-fallback::before {

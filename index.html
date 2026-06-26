@@ -209,8 +209,11 @@
         if (!videoPlaying) {
           video.style.display = 'none';
           fallback.style.display = 'block';
-          if (nav) nav.classList.remove('nav-on-video');
-          console.log('→ Showing logo fallback');
+          if (nav) {
+            nav.classList.remove('nav-on-video');
+            nav.classList.add('nav-on-fallback');
+          }
+          console.log('→ Showing image fallback');
         }
       }
 
@@ -219,7 +222,10 @@
         videoPlaying = true;
         video.style.display = 'block';
         fallback.style.display = 'none';
-        if (nav) nav.classList.add('nav-on-video');
+        if (nav) {
+          nav.classList.add('nav-on-video');
+          nav.classList.remove('nav-on-fallback');
+        }
         console.log('✓ Showing video');
       }
 
