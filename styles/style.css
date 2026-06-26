@@ -461,6 +461,14 @@ h3 {
   transition: transform 0.3s ease;
 }
 
+.product-img-expandable {
+  cursor: zoom-in;
+}
+
+.product-image.product-img-expandable {
+  cursor: zoom-in;
+}
+
 .product-card:hover .placeholder-img {
   transform: scale(1.1) rotate(2deg);
 }
@@ -842,13 +850,55 @@ h3 {
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: -1;
+  z-index: 0;
 
   background: url('../assets/hero-fallback-bg.png') no-repeat center center;
   background-size: cover;
 
   opacity: 1;
   filter: brightness(1) contrast(1);
+}
+
+/* Clickable overlay — opens full image lightbox when fallback is active */
+.hero-fallback-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border: none;
+  padding: 0;
+  margin: 0;
+  background: transparent;
+  cursor: zoom-in;
+}
+
+.hero-fallback-overlay::after {
+  content: 'Tap to view full image';
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 0.5rem 1rem;
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: rgba(0, 0, 0, 0.55);
+  background: rgba(255, 255, 255, 0.75);
+  border-radius: 20px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.hero.fallback-active .hero-fallback-overlay:hover::after,
+.hero.fallback-active .hero-fallback-overlay:focus-visible::after {
+  opacity: 1;
+}
+
+.hero.fallback-active .hero-content,
+.hero.fallback-active .main-nav {
+  position: relative;
+  z-index: 2;
 }
 
 /* Animated glow effect */
@@ -914,6 +964,184 @@ h3 {
   .hero-bg-fallback::before {
     animation: none;
     opacity: 0.5;
+  }
+}
+
+/* Full-image lightbox */
+.hero-image-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 20000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.35s ease, visibility 0.35s ease;
+  cursor: auto;
+}
+
+.hero-image-lightbox.is-open {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.hero-image-lightbox-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(5, 17, 10, 0.92);
+  cursor: zoom-out;
+}
+
+.hero-image-lightbox-img {
+  position: relative;
+  z-index: 1;
+  max-width: min(95vw, 1200px);
+  max-height: 90vh;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border-radius: 8px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  animation: lightboxFadeIn 0.4s ease;
+}
+
+.hero-image-lightbox-close {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.25rem;
+  z-index: 2;
+  width: 44px;
+  height: 44px;
+  border: 1px solid rgba(212, 175, 55, 0.5);
+  border-radius: 50%;
+  background: rgba(5, 17, 10, 0.8);
+  color: var(--color-primary);
+  font-size: 1.75rem;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.hero-image-lightbox-close:hover {
+  background: rgba(212, 175, 55, 0.15);
+  transform: scale(1.05);
+}
+
+body.lightbox-open {
+  overflow: hidden;
+}
+
+@keyframes lightboxFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Product image lightbox */
+.product-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 20000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.35s ease, visibility 0.35s ease;
+  cursor: auto;
+}
+
+.product-lightbox.is-open {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.product-lightbox-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(5, 17, 10, 0.92);
+  cursor: zoom-out;
+}
+
+.product-lightbox-img {
+  position: relative;
+  z-index: 1;
+  max-width: min(95vw, 900px);
+  max-height: 90vh;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border-radius: 8px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  animation: lightboxFadeIn 0.4s ease;
+}
+
+.product-lightbox-close {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.25rem;
+  z-index: 2;
+  width: 44px;
+  height: 44px;
+  border: 1px solid rgba(212, 175, 55, 0.5);
+  border-radius: 50%;
+  background: rgba(5, 17, 10, 0.8);
+  color: var(--color-primary);
+  font-size: 1.75rem;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.product-lightbox-close:hover {
+  background: rgba(212, 175, 55, 0.15);
+  transform: scale(1.05);
+}
+
+@media (max-width: 768px) {
+  .product-lightbox {
+    padding: 1rem;
+  }
+
+  .product-lightbox-close {
+    top: 0.75rem;
+    right: 0.75rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-fallback-overlay::after {
+    opacity: 1;
+    font-size: 0.65rem;
+    bottom: 1.25rem;
+  }
+
+  .hero-image-lightbox {
+    padding: 1rem;
+  }
+
+  .hero-image-lightbox-close {
+    top: 0.75rem;
+    right: 0.75rem;
   }
 }
 

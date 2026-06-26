@@ -1,5 +1,6 @@
 import './styles/style.css'
 import Lenis from 'lenis'
+import { initProductLightbox } from './product-lightbox.js'
 
 // --- Preloader Logic ---
 // --- Preloader Logic ---
@@ -99,6 +100,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 });
+
+initProductLightbox();
 
 // --- Magnetic Buttons ---
 const buttons = document.querySelectorAll('.cta-button');

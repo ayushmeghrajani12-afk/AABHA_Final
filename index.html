@@ -71,6 +71,7 @@
 
       <!-- FALLBACK: Logo background (hidden by default, shown if video fails) -->
       <div class="hero-bg-fallback"></div>
+      <button type="button" class="hero-fallback-overlay" aria-label="View full brand image" hidden></button>
 
       <div class="hero-bg"></div>
       <div class="hero-year"></div>
@@ -193,22 +194,66 @@
     </footer>
   </div>
 
+  <!-- Full-image lightbox (fallback hero only) -->
+  <div class="hero-image-lightbox" id="hero-image-lightbox" aria-hidden="true" role="dialog" aria-label="Full brand image">
+    <div class="hero-image-lightbox-backdrop"></div>
+    <button type="button" class="hero-image-lightbox-close" aria-label="Close full image">&times;</button>
+    <img src="assets/hero-fallback-bg.png" alt="Aabha — Pure. Natural. You." class="hero-image-lightbox-img">
+  </div>
+
   <!-- Smart Video with Logo Fallback -->
   <script>
     (function () {
       const video = document.getElementById('hero-video');
       const fallback = document.querySelector('.hero-bg-fallback');
       const nav = document.querySelector('.main-nav');
+      const hero = document.querySelector('.hero');
+      const fallbackOverlay = document.querySelector('.hero-fallback-overlay');
+      const lightbox = document.getElementById('hero-image-lightbox');
+      const lightboxBackdrop = lightbox?.querySelector('.hero-image-lightbox-backdrop');
+      const lightboxClose = lightbox?.querySelector('.hero-image-lightbox-close');
 
       if (!video || !fallback) return;
 
       let videoPlaying = false;
+      let fallbackActive = false;
+
+      function openLightbox() {
+        if (!lightbox || !fallbackActive) return;
+        lightbox.classList.add('is-open');
+        lightbox.setAttribute('aria-hidden', 'false');
+        document.body.classList.add('lightbox-open');
+      }
+
+      function closeLightbox() {
+        if (!lightbox) return;
+        lightbox.classList.remove('is-open');
+        lightbox.setAttribute('aria-hidden', 'true');
+        document.body.classList.remove('lightbox-open');
+      }
+
+      function setFallbackActive(active) {
+        fallbackActive = active;
+        if (hero) hero.classList.toggle('fallback-active', active);
+        if (fallbackOverlay) fallbackOverlay.hidden = !active;
+      }
+
+      fallbackOverlay?.addEventListener('click', openLightbox);
+      lightboxBackdrop?.addEventListener('click', closeLightbox);
+      lightboxClose?.addEventListener('click', closeLightbox);
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && lightbox?.classList.contains('is-open')) {
+          closeLightbox();
+        }
+      });
 
       // Function to show fallback
       function showFallback() {
         if (!videoPlaying) {
           video.style.display = 'none';
           fallback.style.display = 'block';
+          setFallbackActive(true);
           if (nav) {
             nav.classList.remove('nav-on-video');
             nav.classList.add('nav-on-fallback');
@@ -222,6 +267,8 @@
         videoPlaying = true;
         video.style.display = 'block';
         fallback.style.display = 'none';
+        setFallbackActive(false);
+        closeLightbox();
         if (nav) {
           nav.classList.add('nav-on-video');
           nav.classList.remove('nav-on-fallback');
@@ -253,8 +300,9 @@
             console.log('✗ Video blocked:', error.message);
             showFallback();
 
-            // Try playing on user interaction
-            const tryPlay = () => {
+            // Try playing on user interaction (skip if opening the full image)
+            const tryPlay = (e) => {
+              if (e?.target?.closest?.('.hero-fallback-overlay, .hero-image-lightbox')) return;
               video.play().then(() => {
                 showVideo();
               }).catch(() => {
@@ -291,6 +339,10 @@
         console.log('⚠ Video stalled');
         showFallback();
       });
+
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        showFallback();
+      }
 
     })();
   </script>
