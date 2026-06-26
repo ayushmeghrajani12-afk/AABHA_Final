@@ -228,158 +228,370 @@
             font-weight: 600;
             z-index: 1;
         }
+
+        .categories-nav {
+            position: sticky;
+            top: 0;
+            background: rgba(26, 60, 43, 0.95);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            z-index: 100;
+            padding: 15px 10px;
+            margin: 0 -20px 50px -20px;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            overflow-x: auto;
+            scrollbar-width: none;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .categories-nav::-webkit-scrollbar {
+            display: none;
+        }
+
+        .categories-nav a {
+            color: #c9d6c4;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            padding: 8px 16px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .categories-nav a:hover,
+        .categories-nav a.active {
+            color: #1a3a2e;
+            background: #d4af37;
+        }
+
+        .category-section {
+            margin-bottom: 80px;
+            scroll-margin-top: 100px;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .category-title {
+            color: #d4af37;
+            font-size: 2.2rem;
+            font-weight: 300;
+            letter-spacing: 2px;
+            margin-bottom: 30px;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+            padding-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        .coming-soon-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 2px dashed rgba(212, 175, 55, 0.3);
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 40px;
+            min-height: 450px;
+            color: #c9d6c4;
+            box-shadow: none;
+            width: 100%;
+        }
+
+        .coming-soon-card h3 {
+            color: #d4af37;
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            font-weight: 400;
+        }
+
+        .coming-soon-card p {
+            font-size: 1.1rem;
+            max-width: 280px;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+
+        .coming-soon-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            animation: pulse 2s infinite ease-in-out;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.7; }
+            50% { transform: scale(1.1); opacity: 1; }
+        }
     </style>
 </head>
 
 <body>
     <div class="container">
         <header>
+            <nav style="display: flex; justify-content: center; gap: 30px; margin-bottom: 20px;">
+                <a href="../index.html" style="color: #d4af37; text-decoration: none; font-size: 1rem; letter-spacing: 2px; text-transform: uppercase;">Home</a>
+                <a href="../about/index.html" style="color: #d4af37; text-decoration: none; font-size: 1rem; letter-spacing: 2px; text-transform: uppercase;">About</a>
+                <a href="../contact/index.html" style="color: #d4af37; text-decoration: none; font-size: 1rem; letter-spacing: 2px; text-transform: uppercase;">Contact</a>
+            </nav>
             <h1>Aabha</h1>
             <p class="subtitle">Nature's Luxury for Your Skin</p>
         </header>
 
-        <div class="products-grid">
-            <!-- Product 1 -->
-            <div class="product-card">
-                <span class="badge">NEW</span>
-                <img src="/assets/Gemini_Generated_Image_p94y7lp94y7lp94y (1).png" alt="RoseMarry Hair Toner"
-                    class="product-image" />
-                <div class="product-info">
-                    <h2 class="product-name">RoseMarry Hair Toner</h2>
-                    <p class="product-tagline">Calms the scalp while adding soft, natural shine.</p>
-                    <p class="product-description">Forest Moss & Aloe</p>
-                    <div class="product-footer">
-                        <span class="price"></span>
-                        <a href="https://wa.me/+919974358866?text=Hi!%20I'm%20interested%20in%20the%20RoseMarry%20Hair%20Toner"
-                            class="shop-now-btn">Shop Now</a>
+        <!-- Sticky Categories Sub-Navigation -->
+        <nav class="categories-nav">
+            <a href="#gel">Gel</a>
+            <a href="#scrub">Scrub</a>
+            <a href="#shampoo">Shampoo</a>
+            <a href="#oil">Oil</a>
+            <a href="#toner">Toner</a>
+            <a href="#serum">Serum</a>
+            <a href="#facepack">Facepack</a>
+            <a href="#kajal">Kajal</a>
+            <a href="#creams">Creams</a>
+        </nav>
+
+        <!-- Gel Section -->
+        <section id="gel" class="category-section">
+            <h2 class="category-title">Gel</h2>
+            <div class="products-grid">
+                <div class="product-card">
+                    <span class="badge">BESTSELLER</span>
+                    <img src="/assets/saffron gel.png" alt="Saffron Gel" class="product-image" />
+                    <div class="product-info">
+                        <h2 class="product-name">Saffron Gel</h2>
+                        <p class="product-tagline">Silky hydration that locks in moisture all day long.</p>
+                        <p class="product-description">Saffron & Rosehip</p>
+                        <div class="product-footer">
+                            <span class="price"></span>
+                            <a href="https://wa.me/+919974358866?text=Hi!%20I'm%20interested%20in%20the%20Saffron%20Gel"
+                                class="shop-now-btn">Shop Now</a>
+                        </div>
                     </div>
                 </div>
             </div>
+        </section>
 
-            <!-- Product 2 -->
-            <div class="product-card">
-                <img src="/assets/walnut scrub.png" alt="Walnut Scrub" class="product-image" />
-                <div class="product-info">
-                    <h2 class="product-name">Walnut Scrub</h2>
-                    <p class="product-tagline">A gentle yet effective exfoliant for a radiant complexion.</p>
-                    <p class="product-description">Tea Tree & Water Lily</p>
-                    <div class="product-footer">
-                        <span class="price"></span>
-                        <a href="https://wa.me/+919974358866?text=Hi!%20I'm%20interested%20in%20the%20Walnut%20Scrub"
-                            class="shop-now-btn">Shop Now</a>
+        <!-- Scrub Section -->
+        <section id="scrub" class="category-section">
+            <h2 class="category-title">Scrub</h2>
+            <div class="products-grid">
+                <div class="product-card">
+                    <img src="/assets/walnut scrub.png" alt="Walnut Scrub" class="product-image" />
+                    <div class="product-info">
+                        <h2 class="product-name">Walnut Scrub</h2>
+                        <p class="product-tagline">A gentle yet effective exfoliant for a radiant complexion.</p>
+                        <p class="product-description">Tea Tree & Water Lily</p>
+                        <div class="product-footer">
+                            <span class="price"></span>
+                            <a href="https://wa.me/+919974358866?text=Hi!%20I'm%20interested%20in%20the%20Walnut%20Scrub"
+                                class="shop-now-btn">Shop Now</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <img src="/assets/almond scrub.png" alt="Almond Scrub" class="product-image" />
+                    <div class="product-info">
+                        <h2 class="product-name">Almond Scrub</h2>
+                        <p class="product-tagline">Exfoliating nourishment for smooth, supple skin.</p>
+                        <p class="product-description">Sweet Almond & Apricot Shells</p>
+                        <div class="product-footer">
+                            <span class="price"></span>
+                            <a href="https://wa.me/+919974358866?text=Hi!%20I'm%20interested%20in%20the%20Almond%20Scrub"
+                                class="shop-now-btn">Shop Now</a>
+                        </div>
                     </div>
                 </div>
             </div>
+        </section>
 
-            <!-- Product 3 -->
-            <div class="product-card">
-                <span class="badge">BESTSELLER</span>
-                <img src="/assets/saffron gel.png" alt="Saffron Gel" class="product-image" />
-                <div class="product-info">
-                    <h2 class="product-name">Saffron Gel</h2>
-                    <p class="product-tagline">Silky hydration that locks in moisture all day long.</p>
-                    <p class="product-description">Saffron & Rosehip</p>
-                    <div class="product-footer">
-                        <span class="price"></span>
-                        <a href="https://wa.me/+919974358866?text=Hi!%20I'm%20interested%20in%20the%20Saffron%20Gel"
-                            class="shop-now-btn">Shop Now</a>
+        <!-- Shampoo Section -->
+        <section id="shampoo" class="category-section">
+            <h2 class="category-title">Shampoo</h2>
+            <div class="products-grid">
+                <div class="product-card">
+                    <img src="/assets/anti dandruff shampoo.png" alt="Anti Dandruff Shampoo" class="product-image" />
+                    <div class="product-info">
+                        <h2 class="product-name">Anti Dandruff Shampoo</h2>
+                        <p class="product-tagline">Cleanse your scalp thoroughly and banish flakes naturally.</p>
+                        <p class="product-description">Chandan & Rosehip</p>
+                        <div class="product-footer">
+                            <span class="price"></span>
+                            <a href="https://wa.me/+919974358866?text=Hi!%20I'm%20interested%20in%20the%20Anti%20Dandruff%20Shampoo"
+                                class="shop-now-btn">Shop Now</a>
+                        </div>
                     </div>
                 </div>
             </div>
+        </section>
 
-            <!-- Product 4 -->
-            <div class="product-card">
-                <img src="/assets/kumkumadi tailum.png" alt="Kumkumadi Tailum" class="product-image" />
-                <div class="product-info">
-                    <h2 class="product-name">Kumkumadi Tailum</h2>
-                    <p class="product-tagline">Lightweight serum to restore balance and boost radiance.</p>
-                    <p class="product-description">Rosehip & Chamomile</p>
-                    <div class="product-footer">
-                        <span class="price"></span>
-                        <a href="https://wa.me/+919974358866?text=Hi!%20I'm%20interested%20in%20the%20Kumkumadi%20Tailum"
-                            class="shop-now-btn">Shop Now</a>
+        <!-- Oil Section -->
+        <section id="oil" class="category-section">
+            <h2 class="category-title">Oil</h2>
+            <div class="products-grid">
+                <div class="product-card">
+                    <img src="/assets/kumkumadi tailum.png" alt="Kumkumadi Tailum" class="product-image" />
+                    <div class="product-info">
+                        <h2 class="product-name">Kumkumadi Tailum</h2>
+                        <p class="product-tagline">Lightweight serum to restore balance and boost radiance.</p>
+                        <p class="product-description">Rosehip & Chamomile</p>
+                        <div class="product-footer">
+                            <span class="price"></span>
+                            <a href="https://wa.me/+919974358866?text=Hi!%20I'm%20interested%20in%20the%20Kumkumadi%20Tailum"
+                                class="shop-now-btn">Shop Now</a>
+                        </div>
                     </div>
                 </div>
             </div>
+        </section>
 
-            <!-- Product 5 -->
-            <div class="product-card">
-                <img src="/assets/sunscreen cream.png" alt="Sunscreen Cream" class="product-image" />
-                <div class="product-info">
-                    <h2 class="product-name">Sunscreen Cream</h2>
-                    <p class="product-tagline">Deeply detoxifies and tightens pores for clearer skin.</p>
-                    <p class="product-description">Eucalyptus & Green Clay</p>
-                    <div class="product-footer">
-                        <span class="price"></span>
-                        <a href="https://wa.me/+919974358866?text=Hi!%20I'm%20interested%20in%20the%20Sunscreen%20Cream"
-                            class="shop-now-btn">Shop Now</a>
+        <!-- Toner Section -->
+        <section id="toner" class="category-section">
+            <h2 class="category-title">Toner</h2>
+            <div class="products-grid">
+                <div class="product-card">
+                    <span class="badge">NEW</span>
+                    <img src="/assets/Gemini_Generated_Image_p94y7lp94y7lp94y (1).png" alt="RoseMarry Hair Toner"
+                        class="product-image" />
+                    <div class="product-info">
+                        <h2 class="product-name">RoseMarry Hair Toner</h2>
+                        <p class="product-tagline">Calms the scalp while adding soft, natural shine.</p>
+                        <p class="product-description">Forest Moss & Aloe</p>
+                        <div class="product-footer">
+                            <span class="price"></span>
+                            <a href="https://wa.me/+919974358866?text=Hi!%20I'm%20interested%20in%20the%20RoseMarry%20Hair%20Toner"
+                                class="shop-now-btn">Shop Now</a>
+                        </div>
                     </div>
                 </div>
             </div>
+        </section>
 
-            <!-- Product 6 -->
-            <div class="product-card">
-                <span class="badge">LIMITED</span>
-                <img src="/assets/kajal.png" alt="Kajal" class="product-image" />
-                <div class="product-info">
-                    <h2 class="product-name">Kajal</h2>
-                    <p class="product-tagline">Overnight nourishment to renew and brighten the skin.</p>
-                    <p class="product-description">Lavender & Jojoba</p>
-                    <div class="product-footer">
-                        <span class="price"></span>
-                        <a href="https://wa.me/+919974358866?text=Hi!%20I'm%20interested%20in%20the%20Kajal"
-                            class="shop-now-btn">Shop Now</a>
+        <!-- Serum Section -->
+        <section id="serum" class="category-section">
+            <h2 class="category-title">Serum</h2>
+            <div class="products-grid">
+                <div class="coming-soon-card">
+                    <div class="coming-soon-icon">✨</div>
+                    <h3>Coming Soon</h3>
+                    <p>Our premium botanical serums are currently in formulation. Stay tuned for nature's ultimate elixir!</p>
+                    <a href="https://wa.me/+919974358866?text=Hi!%20I'm%20interested%20in%20your%20upcoming%20Botanical%20Serums" 
+                       class="shop-now-btn">Inquire Now</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Facepack Section -->
+        <section id="facepack" class="category-section">
+            <h2 class="category-title">Facepack</h2>
+            <div class="products-grid">
+                <div class="product-card">
+                    <img src="/assets/dtan facepack.png" alt="Dtan Facepack" class="product-image" />
+                    <div class="product-info">
+                        <h2 class="product-name">Dtan Facepack</h2>
+                        <p class="product-tagline">Overnight nourishment to renew and brighten the skin.</p>
+                        <p class="product-description">Lavender & Jojoba</p>
+                        <div class="product-footer">
+                            <span class="price"></span>
+                            <a href="https://wa.me/+919974358866?text=Hi!%20I'm%20interested%20in%20the%20Dtan%20Facepack"
+                                class="shop-now-btn">Shop Now</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <img src="/assets/chandan face pack.png" alt="Chandan Facepack" class="product-image" />
+                    <div class="product-info">
+                        <h2 class="product-name">Chandan Facepack</h2>
+                        <p class="product-tagline">Soothe inflammation and restore clean radiance.</p>
+                        <p class="product-description">Chandan & Rosehip</p>
+                        <div class="product-footer">
+                            <span class="price"></span>
+                            <a href="https://wa.me/+919974358866?text=Hi!%20I'm%20interested%20in%20the%20Chandan%20Facepack"
+                                class="shop-now-btn">Shop Now</a>
+                        </div>
                     </div>
                 </div>
             </div>
+        </section>
 
-            <!-- Product 7 -->
-            <div class="product-card">
-                <img src="/assets/dtan facepack.png" alt="Dtan Facepack" class="product-image" />
-                <div class="product-info">
-                    <h2 class="product-name">Dtan Facepack</h2>
-                    <p class="product-tagline">Overnight nourishment to renew and brighten the skin.</p>
-                    <p class="product-description">Lavender & Jojoba</p>
-                    <div class="product-footer">
-                        <span class="price"></span>
-                        <a href="https://wa.me/+919974358866?text=Hi!%20I'm%20interested%20in%20the%20Dtan%20Facepack"
-                            class="shop-now-btn">Shop Now</a>
+        <!-- Kajal Section -->
+        <section id="kajal" class="category-section">
+            <h2 class="category-title">Kajal</h2>
+            <div class="products-grid">
+                <div class="product-card">
+                    <span class="badge">LIMITED</span>
+                    <img src="/assets/kajal.png" alt="Kajal" class="product-image" />
+                    <div class="product-info">
+                        <h2 class="product-name">Kajal</h2>
+                        <p class="product-tagline">Defining gaze with pure organic herbs and pigments.</p>
+                        <p class="product-description">Lavender & Jojoba</p>
+                        <div class="product-footer">
+                            <span class="price"></span>
+                            <a href="https://wa.me/+919974358866?text=Hi!%20I'm%20interested%20in%20the%20Kajal"
+                                class="shop-now-btn">Shop Now</a>
+                        </div>
                     </div>
                 </div>
             </div>
+        </section>
 
-            <!-- Product 8 -->
-            <div class="product-card">
-                <img src="/assets/chandan face pack.png" alt="Chandan Facepack" class="product-image" />
-                <div class="product-info">
-                    <h2 class="product-name">Chandan Facepack</h2>
-                    <p class="product-tagline">Overnight nourishment to renew and brighten the skin.</p>
-                    <p class="product-description">Chandan & Rosehip</p>
-                    <div class="product-footer">
-                        <span class="price"></span>
-                        <a href="https://wa.me/+919974358866?text=Hi!%20I'm%20interested%20in%20the%20Chandan%20Facepack"
-                            class="shop-now-btn">Shop Now</a>
+        <!-- Creams Section -->
+        <section id="creams" class="category-section">
+            <h2 class="category-title">Creams</h2>
+            <div class="products-grid">
+                <div class="product-card">
+                    <img src="/assets/sunscreen cream.png" alt="Sunscreen Cream" class="product-image" />
+                    <div class="product-info">
+                        <h2 class="product-name">Sunscreen Cream</h2>
+                        <p class="product-tagline">Deeply detoxifies and tightens pores for clearer skin.</p>
+                        <p class="product-description">Eucalyptus & Green Clay</p>
+                        <div class="product-footer">
+                            <span class="price"></span>
+                            <a href="https://wa.me/+919974358866?text=Hi!%20I'm%20interested%20in%20the%20Sunscreen%20Cream"
+                                class="shop-now-btn">Shop Now</a>
+                        </div>
                     </div>
                 </div>
             </div>
-
-
-            <!-- Product 9 -->
-            <div class="product-card">
-                <img src="/assets/anti dandruff shampoo.png" alt="Anti Dandruff Shampoo" class="product-image" />
-                <div class="product-info">
-                    <h2 class="product-name">Anti Dandruff Shampoo</h2>
-                    <p class="product-tagline">Overnight nourishment to renew and brighten the skin.</p>
-                    <p class="product-description">Chandan & Rosehip</p>
-                    <div class="product-footer">
-                        <span class="price"></span>
-                        <a href="https://wa.me/+919974358866?text=Hi!%20I'm%20interested%20in%20the%20Anti%20Dandruff%20Shampoo"
-                            class="shop-now-btn">Shop Now</a>
-                    </div>
-                </div>
-            </div>
-        </div>
+        </section>
     </div>
-</body>
 
+    <!-- Active Navigation Indicator Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const sections = document.querySelectorAll('.category-section');
+            const navLinks = document.querySelectorAll('.categories-nav a');
+
+            const observerOptions = {
+                root: null,
+                rootMargin: '-20% 0px -60% 0px',
+                threshold: 0
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const activeId = entry.target.getAttribute('id');
+                        navLinks.forEach(link => {
+                            if (link.getAttribute('href') === `#${activeId}`) {
+                                link.classList.add('active');
+                                link.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+                            } else {
+                                link.classList.remove('active');
+                            }
+                        });
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+        });
+    </script>
+</body>
 </html>

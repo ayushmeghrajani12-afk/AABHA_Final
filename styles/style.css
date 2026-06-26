@@ -427,11 +427,11 @@ h3 {
 }
 
 .product-image {
-  flex: 0 0 60%;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
   padding: 0;
   display: block;
-  width: 100%;
-  height: 100%;
   box-sizing: border-box;
 }
 
@@ -1086,7 +1086,7 @@ a:focus {
   }
 
   .product-image {
-    flex-basis: 58%;
+    flex-basis: auto;
   }
 
   .footer-links {
