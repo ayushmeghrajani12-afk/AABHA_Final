@@ -21,14 +21,15 @@
         .subtitle { color: #c9d6c4; font-size: 1.2rem; font-style: italic; margin-bottom: 40px; animation: fadeInDown 1s ease-out; }
         
         .contact-wrapper {
-            display: grid; grid-template-columns: 1fr 1fr; gap: 40px;
+            display: block;
+            max-width: 720px;
             background: rgba(255, 255, 255, 0.05);
             border-radius: 20px;
             overflow: hidden;
             box-shadow: 0 15px 40px rgba(0,0,0,0.4);
             border: 1px solid rgba(212, 175, 55, 0.2);
             animation: fadeInUp 1s ease-out;
-            margin-bottom: 50px;
+            margin: 0 auto 50px;
         }
         
         .contact-info { padding: 50px; background: rgba(5, 17, 10, 0.6); }
@@ -49,29 +50,9 @@
         }
         .whatsapp-btn:hover { transform: scale(1.05); }
 
-        .contact-form { padding: 50px; }
-        .form-group { margin-bottom: 25px; position: relative; }
-        .form-group input, .form-group textarea {
-            width: 100%; padding: 12px 0;
-            background: transparent; border: none; border-bottom: 1px solid rgba(212, 175, 55, 0.4);
-            color: #fff; font-size: 1.1rem; font-family: 'Georgia', serif;
-            transition: border-color 0.3s; outline: none;
-        }
-        .form-group input::placeholder, .form-group textarea::placeholder { color: rgba(226, 226, 226, 0.5); }
-        .form-group input:focus, .form-group textarea:focus { border-bottom-color: #d4af37; }
-        .form-group textarea { resize: vertical; min-height: 100px; }
-        
-        button[type="submit"] {
-            background: transparent; border: 1px solid #d4af37; color: #d4af37;
-            padding: 15px 40px; font-size: 1.1rem; cursor: pointer;
-            border-radius: 30px; transition: all 0.3s; width: 100%; font-family: 'Georgia', serif;
-            text-transform: uppercase; letter-spacing: 1px;
-        }
-        button[type="submit"]:hover { background: #d4af37; color: #05110A; }
-        
         @keyframes fadeInDown { from { opacity: 0; transform: translateY(-30px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
-        @media (max-width: 768px) { .contact-wrapper { grid-template-columns: 1fr; } h1 { font-size: 2.5rem; } }
+        @media (max-width: 768px) { h1 { font-size: 2.5rem; } }
     </style>
 </head>
 <body>
@@ -96,34 +77,12 @@
                     <a href="https://wa.me/+919974358866" class="whatsapp-btn">💬 Chat on WhatsApp</a>
                 </div>
                 
-                <div class="info-item" style="margin-top: 30px;">
-                    <h3>Email</h3>
-                    <a href="mailto:hello@aabhanaturals.com">hello@aabhanaturals.com</a>
-                </div>
+                
                 
                 <div class="info-item" style="margin-top: 30px;">
                     <h3>Follow our Journey</h3>
-                    <a href="#" style="margin-right: 15px;">Instagram</a>
-                    <a href="#">Facebook</a>
+                    <a href="https://www.instagram.com/aabha.nature/" style="margin-right: 15px;">Instagram</a>
                 </div>
-            </div>
-            
-            <div class="contact-form">
-                <form action="#" method="get" onsubmit="event.preventDefault(); alert('Thank you for reaching out! We will get back to you soon.');">
-                    <div class="form-group">
-                        <input type="text" placeholder="Your Name" required>
-                    </div>
-                    <div class="form-group">
-                        <input type="email" placeholder="Your Email" required>
-                    </div>
-                    <div class="form-group">
-                        <input type="text" placeholder="Subject">
-                    </div>
-                    <div class="form-group">
-                        <textarea placeholder="Your Message" required></textarea>
-                    </div>
-                    <button type="submit">Send Message</button>
-                </form>
             </div>
         </main>
     </div>
